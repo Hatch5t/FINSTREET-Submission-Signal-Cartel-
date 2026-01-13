@@ -1,52 +1,17 @@
-# 📈 ML-Driven Algo Trading Strategy (Kshitij 2026 - FinStreet)
+# ML-Driven Algo Trading Strategy (Kshitij 2026 - FinStreet)
 
 **Team Name:** Signal Cartel  
 **Stock Selected:** `NSE:SONATSOFTW-EQ` (Sonata Software Ltd)
 
-## 📖 Overview
-This project is an end-to-end algorithmic trading system developed for the **Round 2 Submission of FinStreet (Kshitij 2026)**. 
+## Overview
+
+This project is an end-to-end algorithmic trading system developed for the **Round 2 Submission of FinStreet (Kshitij 2026)**.
 
 The system leverages a **Random Forest Classifier** to predict short-term price movements and executes trades automatically via the **Fyers API**. It features a robust data pipeline, advanced feature engineering, and strict risk management rules (Volatility Targeting).
 
 ---
 
-## 🚀 Key Features
-* **Automated Data Pipeline**: Fetches historical daily OHLCV data directly from the Fyers API.
-* **Machine Learning Core**: Uses a Random Forest model trained on technical indicators (RSI, MACD, Bollinger Bands) to predict directional moves.
-* **Walk-Forward Validation**: Retrains the model daily to prevent look-ahead bias and adapt to changing market regimes.
-* **Risk Management**: Implements **Volatility Targeting** to dynamically adjust position sizes based on market risk.
-* **Live Execution Ready**: Generates compliant API payloads for the Fyers trading ecosystem.
-
----
-
-## 📂 Repository Structure
-
-```text
-Kshitij2026_AlgoStrategy/
-│
-├── Data/                        # Data Generation Zone
-│   ├── FYERS_API_Integration.ipynb  # [STEP 1] Run this to fetch data
-│   ├── SONATSOFTW_daily_...csv      # The output CSV (Historical Data)
-│   └── access_token.txt             # The generated token
-│
-├── src/                         # Strategy Logic Zone
-│   ├── __init__.py              # (Empty file)
-│   ├── config.py                # API Credentials & Settings
-│   ├── features.py              # Feature Engineering
-│   ├── strategy.py              # Random Forest Model
-│   └── execution.py             # Trade Execution Logic
-│
-├── main.py                      # [STEP 2] Main Strategy Script
-├── predict_january.py           # [STEP 3] Prediction Rules for Judges
-├── requirements.txt
-└── README.md
-
----
-```
-
----
-
-## 🛠️ Setup & Installation
+## Setup & Installation
 
 ### 1. Prerequisites
 
@@ -58,18 +23,17 @@ Run the following command to install the required libraries, make sure if you ar
 
 ```bash
 pip install -r requirements.txt
-
 ```
 
 ### 3. API Configuration
 
-1. Open `src/config.py`.
-2. Add your **Fyers Client ID**.
+1. Open `Data/config.py`.
+2. Add **Client ID, Client Secret, Redirect URI** to `.env` file.
 3. The system automatically reads the **Access Token** from `Data/access_token.txt` (which is generated in the next step).
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 ### Step 1: Authentication & Data Fetching
 
@@ -85,23 +49,13 @@ Execute the main script from the root folder to process features, run the backte
 
 ```bash
 python main.py
-
 ```
 
-* **Output**: This will print the performance metrics (Sharpe Ratio, Total Return) and save a performance chart as `Strategy_Performance.png`.
-
-### Step 3: View January Predictions
-
-To see the model's specific logic for the Jan 1st - Jan 8th prediction window:
-
-```bash
-python predict_january.py
-
-```
+* **Output**: This will print the performance metrics (Sharpe Ratio, Total Return) and save a performance chart as `strategy_performance.png`.
 
 ---
 
-## 🧠 Strategy Logic
+## Strategy Logic
 
 ### 1. Feature Engineering
 
@@ -127,14 +81,16 @@ We transform raw price data into predictive signals using:
 
 ---
 
-## 📊 Performance Metrics (Nov-Dec 2025 Backtest)
+## Performance Metrics (Nov-Dec 2025 Backtest)
 
 * **Sharpe Ratio**: > 1.5 (Target Met)
 * **Max Drawdown**: Controlled via Volatility Targeting.
 * **Execution**: Validated via Fyers API payload generation.
 
+![metrics](./strategy_performance.png)
+
 ---
 
 ### Disclaimer
 
-This project is for educational and hackathon evaluation purposes. All API calls in `execution.py` are set to **Print-Only Mode** to prevent accidental real-money trades during testing.
+> This project is for educational and hackathon evaluation purposes. All API calls in `execution.py` are set to **Print-Only Mode** to prevent accidental real-money trades during testing.
